@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from genuinescore.views import hola, raiz, horas_adelante, fecha_actual
-from biblioteca.views import mostrar_naveador, mostrar_request_items
+from biblioteca import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^$', raiz),
     url(r'^fecha/mas/(\d{1,2})/$', horas_adelante),
     url(r'^fecha/actual/$', fecha_actual),
-    url(r'^nav/$', mostrar_naveador),
-    url(r'^items/nav/$',mostrar_request_items),
+    url(r'^nav/$', views.mostrar_naveador),
+    url(r'^items/nav/$', views.mostrar_request_items),
+    url(r'^formulario-buscar/$', views.formulario_buscar),
+    url(r'^buscar/$', views.buscar),
 ]
