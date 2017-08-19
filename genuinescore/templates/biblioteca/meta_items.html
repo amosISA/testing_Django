@@ -1,0 +1,17 @@
+<html>
+<body>
+    <h1>Bienvenido a mi pagina en {{ ruta }}</h1>
+    <table>
+        {% if items %}
+            {% for key, value in items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <h1>No items</h1>
+        {% endif %}
+    </table>
+</body>
+</html>

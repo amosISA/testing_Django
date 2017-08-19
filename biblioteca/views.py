@@ -15,7 +15,5 @@ def mostrar_naveador(request):
 def mostrar_request_items(request):
     valor = request.META.items()
     valor.sort()
-    html = []
-    for k,v in valor:
-        html.append("<tr><td>%s</td><td>%s</td></tr>" % (k,v))
-    return HttpResponse('<table>%s</table>'%'\n'.join(html))
+    path = request.path
+    return render(request, 'biblioteca/meta_items.html', {'items':valor, 'ruta':path})
