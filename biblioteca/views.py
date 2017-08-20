@@ -23,9 +23,15 @@ def formulario_buscar(request):
     return render(request, 'formulario_buscar.html')
 
 def buscar(request):
-    if 'q' in request.GET and request.GET['q']:
+    errors = []
+    if 'q' in request.GET:
         q = request.GET['q']
-        libros = Libro.objects.filter(titulo__icontains=q)
-        return render(request, 'resultados.html', {'libros':libros, 'query':q})
-    else:
-        return HttpResponse("Por favor introduce un término de búsqueda.")
+        if not q: #si cuando visitas el formulario el input esta vacio
+            errors.append("Por favor introduce un término de búsqueda válido!")
+        elif len(q) > 20:
+            errors.append("Por favor introduce un término de búsqueda inferior a 20 caracteres.")
+        else:
+            libros = Libro.objects.filter(titulo__icontains=q)
+            return render(request, 'resultados.html', {'libros':libros, 'query':q})
+
+    return render(request, 'formulario_buscar.html', {'errors':errors})
